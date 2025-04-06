@@ -6,8 +6,17 @@ metadata:
   name: demo-pod
 spec:
   containers:
-    - image: nginx
-      name: demo-pod
-      resources: {}
+    - name: postgres
+      image: postgres
+      env:
+        - name: POSTGRES_PASSWORD
+          value: pass
+      volumeMounts:
+        - mountPath: /demo
+          name: demo-pod-volume
+  volumes:
+    - name: demo-pod-volume
+      emptyDir:
+        sizeLimit: 500Mi
   dnsPolicy: ClusterFirst
   restartPolicy: Always
