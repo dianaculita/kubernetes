@@ -26,3 +26,10 @@ spec:
               value: pass
           ports:
             - containerPort: 3066
+          volumeMounts:
+            - mountPath: /library-storage
+              name: library-storage
+      volumes:
+        - name: library-storage
+          persistentVolumeClaim:
+            claimName: library-claim
